@@ -1,0 +1,12 @@
+# editor-specific
+.vscode/
+.clangd
+.clang-format
+.cache
+compile_commands.json
+
+# compilation
+build/
+
+# misc
+.git
