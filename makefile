@@ -14,9 +14,11 @@ TARGET      := mat_mult_prog
 CC := gcc
 
 ifeq ($(DEBUG), true)
-	CFLAGS := -Wall -fopenmp -I$(INCLUDE_DIR) -MMD -MP -O0 -g
+	OPTIMIZATION_LEVEL ?= 0
+	CFLAGS := -Wall -fopenmp -I$(INCLUDE_DIR) -MMD -MP -O$(OPTIMIZATION_LEVEL) -g
 else
-	CFLAGS := -Wall -fopenmp -I$(INCLUDE_DIR) -MMD -MP -O2
+	OPTIMIZATION_LEVEL ?= 2
+	CFLAGS := -Wall -fopenmp -I$(INCLUDE_DIR) -MMD -MP -O$(OPTIMIZATION_LEVEL)
 endif
 
 LDFLAGS := -fopenmp
@@ -42,8 +44,10 @@ $(BUILD_DIR)/$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 # helpers
 .PHONY: clean run run-perf
 
+ALGO        ?= naive-ijk
+MAT_SIZE    ?= 2
 NUM_THREADS ?= 1
-NUM_OPS ?= 1
+NUM_OPS 	?= 1
 
 RUN_CMD := ./$(BUILD_DIR)/$(TARGET) $(ALGO) $(MAT_SIZE) $(NUM_THREADS) $(NUM_OPS) 
 
