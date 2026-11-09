@@ -38,7 +38,7 @@ char* cmdline_get_args(
 {
     // TODO: Add more specific error/help messages
     // TODO: Add default arguments
-    if (argc != 5)
+    if (argc < 3 || argc > 5)
         return "Invalid argument count.";
 
     // get algorithm
@@ -51,19 +51,20 @@ char* cmdline_get_args(
     mat_size_t size;
     if (sscanf(argv[2], "%hu", &size) != 1 || size == 0)
         return "Invalid size.";
-
-    // get number of threads
-    unsigned short num_multiplications;
-    if (
-        sscanf(argv[3], "%hu", &num_multiplications) != 1
-        || num_multiplications == 0
-    )
-        return "Invalid number of operations.";
     
     // get number of threads
-    unsigned short num_threads;
-    if (sscanf(argv[3], "%hu", &num_threads) != 1 || num_threads == 0)
-        return "Invalid number of threads.";
+    unsigned short num_threads = 1;
+    if (argc >= 4)
+        if (sscanf(argv[3], "%hu", &num_threads) != 1 || num_threads == 0)
+            return "Invalid number of threads.";
+
+    // get number of threads
+    unsigned short num_multiplications = 1;
+    if (argc >= 5)
+        if (sscanf(argv[4], "%hu", &num_multiplications) != 1
+            || num_multiplications == 0
+        )
+            return "Invalid number of multiplications.";
 
     // return args
     args->mat_size            = size;

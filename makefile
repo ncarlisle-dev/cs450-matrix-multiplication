@@ -42,7 +42,10 @@ $(BUILD_DIR)/$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 # helpers
 .PHONY: clean run run-perf
 
-RUN_CMD := ./$(BUILD_DIR)/$(TARGET) $(ALGO) $(MAT_SIZE) $(NUM_OPS) $(NUM_THREADS)
+NUM_THREADS ?= 1
+NUM_OPS ?= 1
+
+RUN_CMD := ./$(BUILD_DIR)/$(TARGET) $(ALGO) $(MAT_SIZE) $(NUM_THREADS) $(NUM_OPS) 
 
 run:
 	$(RUN_CMD)
