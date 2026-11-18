@@ -21,11 +21,9 @@ static const _cmdline_algo_entry_t _CMDLINE_ALGO_MAP[NUM_MMAS] = {
 
 static mma_t _get_algo_by_key(const char* const key)
 {
-    for (int i = 0; i < NUM_MMAS; i++) {
-        if (strcmp(_CMDLINE_ALGO_MAP[i].key, key) == 0) {
+    for (int i = 0; i < NUM_MMAS; i++)
+        if (strcmp(_CMDLINE_ALGO_MAP[i].key, key) == 0)
             return _CMDLINE_ALGO_MAP[i].algo;
-        }
-    }
 
     return MMA_INVALID;
 }

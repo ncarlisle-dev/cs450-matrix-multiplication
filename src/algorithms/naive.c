@@ -12,8 +12,9 @@ void mat_mult_naive_ijk(
     for (mat_size_t i = 0; i < size; i++)
         for (mat_size_t j = 0; j < size; j++)
             for (mat_size_t k = 0; k < size; k++)
-                (product->data)[i][j] += 
-                    (mat1->data)[i][k] * (mat2->data)[k][j];
+                (product->data)[i][j] += (
+                    (mat1->data)[i][k] * (mat2->data)[k][j]
+                );
 }
 
 void mat_mult_naive_ikj(
@@ -28,8 +29,9 @@ void mat_mult_naive_ikj(
     for (mat_size_t i = 0; i < size; i++)
         for (mat_size_t k = 0; k < size; k++)
             for (mat_size_t j = 0; j < size; j++)
-                (product->data)[i][j] += 
-                    (mat1->data)[i][k] * (mat2->data)[k][j];
+                (product->data)[i][j] += (
+                    (mat1->data)[i][k] * (mat2->data)[k][j]
+                );
 }
 
 void mat_mult_naive_jik(
@@ -44,8 +46,9 @@ void mat_mult_naive_jik(
     for (mat_size_t j = 0; j < size; j++)
         for (mat_size_t i = 0; i < size; i++)
             for (mat_size_t k = 0; k < size; k++)
-                (product->data)[i][j] += 
-                    (mat1->data)[i][k] * (mat2->data)[k][j];
+                (product->data)[i][j] += (
+                    (mat1->data)[i][k] * (mat2->data)[k][j]
+                );
 }
 
 void mat_mult_naive_jki(
@@ -60,8 +63,9 @@ void mat_mult_naive_jki(
     for (mat_size_t j = 0; j < size; j++)
         for (mat_size_t k = 0; k < size; k++)
             for (mat_size_t i = 0; i < size; i++)
-                (product->data)[i][j] += 
-                    (mat1->data)[i][k] * (mat2->data)[k][j];
+                (product->data)[i][j] += (
+                    (mat1->data)[i][k] * (mat2->data)[k][j]
+                );
 }
 
 void mat_mult_naive_kji(
@@ -76,8 +80,9 @@ void mat_mult_naive_kji(
     for (mat_size_t k = 0; k < size; k++)
         for (mat_size_t j = 0; j < size; j++)
             for (mat_size_t i = 0; i < size; i++)
-                (product->data)[i][j] += 
-                    (mat1->data)[i][k] * (mat2->data)[k][j];
+                (product->data)[i][j] += (
+                    (mat1->data)[i][k] * (mat2->data)[k][j]
+                );
 }
 
 void mat_mult_naive_kij(
@@ -92,6 +97,7 @@ void mat_mult_naive_kij(
     for (mat_size_t k = 0; k < size; k++)
         for (mat_size_t i = 0; i < size; i++)
             for (mat_size_t j = 0; j < size; j++)
-                (product->data)[i][j] += 
-                    (mat1->data)[i][k] * (mat2->data)[k][j];
+                (product->data)[i][j] += (
+                    (mat1->data)[i][k] * (mat2->data)[k][j]
+                );
 }

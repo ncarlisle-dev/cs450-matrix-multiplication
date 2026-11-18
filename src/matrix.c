@@ -34,9 +34,7 @@ void mat_print(const mat_t* const mat)
     for (mat_size_t row = 0; row < mat->size; row++)
     {
         for (mat_size_t col = 0; col < mat->size; col++)
-        {
             printf("%lf ", (mat->data)[row][col]);
-        }
 
         printf("\n");
     }
