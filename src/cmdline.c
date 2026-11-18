@@ -38,7 +38,7 @@ char* cmdline_get_args(
 {
     // TODO: Add more specific error/help messages
     // TODO: Add default arguments
-    if (argc != 5)
+    if (argc != 4)
         return "Invalid argument count.";
 
     // get algorithm
@@ -57,17 +57,9 @@ char* cmdline_get_args(
     if (sscanf(argv[3], "%hu", &num_threads) != 1 || num_threads == 0)
         return "Invalid number of threads.";
 
-    // get number of threads
-    unsigned short num_multiplications = 1;
-    if (sscanf(argv[4], "%hu", &num_multiplications) != 1
-        || num_multiplications == 0
-    )
-        return "Invalid number of multiplications.";
-
     // return args
     args->mat_size            = size;
     args->mult_algo           = algo;
-    args->num_multiplications = num_multiplications;
     args->num_threads         = num_threads;
     return NULL;
 }

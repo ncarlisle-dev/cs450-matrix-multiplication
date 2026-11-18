@@ -9,10 +9,10 @@ mat_t* mat_create(const mat_size_t size)
     assert(size > 0);
 
     mat_t* mat = (mat_t*)calloc(1, sizeof(mat_t));
-    mat->data = (mat_member_t**)calloc(size, sizeof(mat_member_t*));
+    mat->data = (mat_element_t**)calloc(size, sizeof(mat_element_t*));
 
     for (mat_size_t i = 0; i < size; i++)
-        mat->data[i] = (mat_member_t*)calloc(size, sizeof(mat_member_t));
+        mat->data[i] = (mat_element_t*)calloc(size, sizeof(mat_element_t));
 
     mat->size = size;
     
@@ -42,12 +42,12 @@ void mat_print(const mat_t* const mat)
     }
 }
 
-static mat_member_t _generate_random_member(
-    const mat_member_t min,
-    const mat_member_t max
+static mat_element_t _generate_random_element(
+    const mat_element_t min,
+    const mat_element_t max
 ) {
     // generate a random float/double
-    mat_member_t scale = (mat_member_t)rand() / RAND_MAX;
+    mat_element_t scale = (mat_element_t)rand() / RAND_MAX;
     return min + scale * (max - min);
 }
 
@@ -55,5 +55,5 @@ void mat_randomize(const mat_t* const mat)
 {
     for (mat_size_t row = 0; row < mat->size; row++)
         for (mat_size_t col = 0; col < mat->size; col++)
-            mat->data[row][col] = _generate_random_member(-100, 100);
+            mat->data[row][col] = _generate_random_element(-100, 100);
 }
