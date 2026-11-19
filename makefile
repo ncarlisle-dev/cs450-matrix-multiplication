@@ -1,5 +1,5 @@
 # files
-SRCS := main.c matrix.c cmdline.c algorithms/algorithms.c algorithms/naive.c
+SRCS := main.c matrix.c cmdline.c algorithms/algorithms.c algorithms/naive.c algorithms/simd.c
 OBJS := $(patsubst %.c,%.o,$(SRCS))
 DEPS := $(patsubst %.c,%.d,$(SRCS))
 
@@ -50,13 +50,13 @@ NUM_THREADS ?= 1
 
 RUN_CMD := ./$(BUILD_DIR)/$(TARGET) $(ALGO) $(MAT_SIZE) $(NUM_THREADS)
 
-run:
+run: $(BUILD_DIR)/$(TARGET)
 	$(RUN_CMD)
 
-run-perf:
+run-perf: $(BUILD_DIR)/$(TARGET)
 	perf stat -e LLC-loads,LLC-load-misses $(RUN_CMD)
 
-run-debug:
+run-debug: $(BUILD_DIR)/$(TARGET)
 	gdb --args $(RUN_CMD)
 
 clean:
