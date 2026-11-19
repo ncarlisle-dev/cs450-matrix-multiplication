@@ -1,5 +1,6 @@
 #include <algorithms/algorithms.h>
 #include <algorithms/naive.h>
+#include <algorithms/simd.h>
 
 static const mma_callback_t _MMA_CALLBACK_MAP[NUM_MMAS] = {
     [MMA_NAIVE_IJK] = mat_mult_naive_ijk,
@@ -8,6 +9,7 @@ static const mma_callback_t _MMA_CALLBACK_MAP[NUM_MMAS] = {
     [MMA_NAIVE_JKI] = mat_mult_naive_jki,
     [MMA_NAIVE_KIJ] = mat_mult_naive_kij,
     [MMA_NAIVE_KJI] = mat_mult_naive_kji,
+    [MMA_SIMD]      = mat_mult_simd,
 };
 
 void mat_mult(

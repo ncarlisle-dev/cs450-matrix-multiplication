@@ -17,6 +17,7 @@ static const _cmdline_algo_entry_t _CMDLINE_ALGO_MAP[NUM_MMAS] = {
     { "naive-jki", MMA_NAIVE_JKI, },
     { "naive-kij", MMA_NAIVE_KIJ, },
     { "naive-kji", MMA_NAIVE_KJI, },
+    { "simd",      MMA_SIMD,      },
 };
 
 static mma_t _get_algo_by_key(const char* const key)
