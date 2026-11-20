@@ -1,5 +1,28 @@
 #include <algorithms/algorithms.h>
 #include <algorithms/naive.h>
+#include <cblas.h>
+
+static void mat_mult_openblas(
+    const mat_t* const mat1,
+    const mat_t* const mat2,
+    const mat_t* const product,
+    const unsigned short num_threads
+)
+{
+    const int n = mat1->size;
+
+    openblas_set_num_threads(num_threads);
+
+    cblas_sgemm(
+        CblasRowMajor, CblasNoTrans, CblasNoTrans,
+        n, n, n,
+        1.0f,
+        mat1->data[0], n,
+        mat2->data[0], n,
+        0.0f,
+        product->data[0], n
+    );
+}
 
 static const mma_callback_t _MMA_CALLBACK_MAP[NUM_MMAS] = {
     [MMA_NAIVE_IJK] = mat_mult_naive_ijk,
@@ -8,6 +31,7 @@ static const mma_callback_t _MMA_CALLBACK_MAP[NUM_MMAS] = {
     [MMA_NAIVE_JKI] = mat_mult_naive_jki,
     [MMA_NAIVE_KIJ] = mat_mult_naive_kij,
     [MMA_NAIVE_KJI] = mat_mult_naive_kji,
+    [MMA_OPENBLAS] = mat_mult_openblas,
 };
 
 void mat_mult(
