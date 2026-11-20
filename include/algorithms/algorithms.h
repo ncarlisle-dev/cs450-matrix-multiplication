@@ -19,6 +19,7 @@ typedef enum
     MMA_NAIVE_JKI,
     MMA_NAIVE_KIJ,
     MMA_NAIVE_KJI,
+    MMA_OPENBLAS,
     NUM_MMAS,
 } mma_t;
 
