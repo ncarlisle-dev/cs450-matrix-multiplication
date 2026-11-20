@@ -1,6 +1,8 @@
 #include <algorithms/algorithms.h>
 #include <algorithms/naive.h>
 #include <cblas.h>
+#include <stdlib.h>
+#include <string.h>
 
 static void mat_mult_openblas(
     const mat_t* const mat1,
@@ -10,6 +12,18 @@ static void mat_mult_openblas(
 )
 {
     const int n = mat1->size;
+    const size_t row_bytes = (size_t)n * sizeof(mat_element_t);
+    const size_t total_bytes = (size_t)n * row_bytes;
+
+    mat_element_t* a = (mat_element_t*)malloc(total_bytes);
+    mat_element_t* b = (mat_element_t*)malloc(total_bytes);
+    mat_element_t* c = (mat_element_t*)malloc(total_bytes);
+
+    for (int i = 0; i < n; i++)
+    {
+        memcpy(a + (size_t)i * n, mat1->data[i], row_bytes);
+        memcpy(b + (size_t)i * n, mat2->data[i], row_bytes);
+    }
 
     openblas_set_num_threads(num_threads);
 
@@ -17,11 +31,18 @@ static void mat_mult_openblas(
         CblasRowMajor, CblasNoTrans, CblasNoTrans,
         n, n, n,
         1.0f,
-        mat1->data[0], n,
-        mat2->data[0], n,
+        a, n,
+        b, n,
         0.0f,
-        product->data[0], n
+        c, n
     );
+
+    for (int i = 0; i < n; i++)
+        memcpy(product->data[i], c + (size_t)i * n, row_bytes);
+
+    free(a);
+    free(b);
+    free(c);
 }
 
 static const mma_callback_t _MMA_CALLBACK_MAP[NUM_MMAS] = {
