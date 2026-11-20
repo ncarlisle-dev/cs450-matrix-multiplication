@@ -22,6 +22,7 @@ else
 endif
 
 LDFLAGS := -fopenmp
+LDFLAGS += -Wl,--no-as-needed -lopenblas
 
 # begin directives
 SRC_FILES := $(addprefix $(SRCS_DIR)/,$(SRCS))
